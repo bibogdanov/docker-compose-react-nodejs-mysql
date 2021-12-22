@@ -4,11 +4,21 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: process.env.CLIENT_ORIGIN || "http://localhost:8081"
-};
-
-app.use(cors(corsOptions));
+var allowedOrigins = ['http://127.0.0.1:8888', 'http://127.0.0.1:6868/', 'http://localhost:8888'];
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin
+    // (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    console.log(origin);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+        'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 // parse requests of content-type - application/json
 app.use(express.json());
