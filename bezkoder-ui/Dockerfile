@@ -1,5 +1,6 @@
 # Stage 1
-FROM node:14 as build-stage
+# FROM node:14 as build-stage
+FROM node:14
 
 WORKDIR /bezkoder-ui
 COPY package.json .
@@ -11,10 +12,12 @@ ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
 
 RUN npm run build
 
-# Stage 2
-FROM nginx:1.17.0-alpine
+ENTRYPOINT npm start
 
-COPY --from=build-stage /bezkoder-ui/build /usr/share/nginx/html
-EXPOSE $REACT_DOCKER_PORT
+# # Stage 2
+# FROM nginx:1.17.0-alpine
 
-CMD nginx -g 'daemon off;'
+# COPY --from=build-stage /bezkoder-ui/build /usr/share/nginx/html
+# EXPOSE $REACT_DOCKER_PORT
+
+# CMD nginx -g 'daemon off;'
