@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const app = express();
 
-var allowedOrigins = ['http://127.0.0.1:8888', 'http://127.0.0.1:6868/', 'http://localhost:8888'];
+var allowedOrigins = ['http://127.0.0.1:8888', 'http://127.0.0.1:6868/', 'http://localhost:8888', 'http://127.0.0.1:8080/'];
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin
@@ -36,10 +36,10 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Tasks Api." });
 });
 
-require("./app/routes/turorial.routes")(app);
+require("./app/routes/task.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_DOCKER_PORT || 8080;

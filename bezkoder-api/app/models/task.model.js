@@ -1,15 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
-  const Tutorial = sequelize.define("tutorial", {
+  const Task = sequelize.define("task", {
     title: {
       type: Sequelize.STRING
     },
     description: {
       type: Sequelize.STRING
     },
-    published: {
-      type: Sequelize.BOOLEAN
+    due_date: {
+      type: Sequelize.DATE
+    },
+    state: {
+      type: Sequelize.STRING
     }
   });
 
-  return Tutorial;
+  return Task;
 };
