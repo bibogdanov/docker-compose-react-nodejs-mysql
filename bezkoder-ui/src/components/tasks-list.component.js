@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TaskDataService from "../services/task.service";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default class TasksList extends Component {
   constructor(props) {
@@ -83,9 +84,35 @@ export default class TasksList extends Component {
 
     TaskDataService.findByTitle(this.state.searchTitle)
       .then(response => {
-        this.setState({
-          tutorials: response.data
-        });
+        let state = null
+        if (response.data.length > 0) {
+          state = response.data[0].state
+        }
+        if (state === "todo") {
+          this.setState({
+            tasks_todo: response.data,
+            tasks_doing: [],
+            tasks_done: []
+          });
+        } else if (state === "doing") {
+          this.setState({
+            tasks_todo: [],
+            tasks_doing: response.data,
+            tasks_done: []
+          });
+        } else if (state === "done") {
+          this.setState({
+            tasks_todo: [],
+            tasks_doing: [],
+            tasks_done: response.data
+          });
+        } else {
+          this.setState({
+            tasks_todo: [],
+            tasks_doing: [],
+            tasks_done: []
+          });
+        }
         console.log(response.data);
       })
       .catch(e => {
@@ -127,8 +154,14 @@ export default class TasksList extends Component {
           <br></br>
           <br></br>
 
-        </div>
+          <Button variant="primary" href="/add" >
+            Create Task
+          </Button>
 
+          <br></br>
+          <br></br>
+
+        </div>
 
         <div className="row" >
 
@@ -224,18 +257,20 @@ export default class TasksList extends Component {
             ) : (
               <div>
                 <br />
-                <p>Please click on a Tutorial...</p>
+                <p>Please click on a Task...</p>
               </div>
             )}
-            <button
-              className="m-3 btn btn-sm btn-danger"
-              onClick={this.removeAllTutorials}
-            >
-              Remove All
-            </button>
           </div>
+          <div className="col-md-3">
+            <br></br>
+            <br></br>
+            <Button variant="danger" onClick={this.removeAllTutorials} >
+              Remove All
+            </Button>
+          </div>
+
         </div>
-      </div>
+      </div >
     );
   }
 }

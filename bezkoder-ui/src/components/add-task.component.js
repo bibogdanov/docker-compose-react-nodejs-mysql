@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import TaskDataService from "../services/task.service";
 import Form from "react-bootstrap/Form";
 
+
+
+// export default class AddTaskModal extends Modal {
 export default class AddTask extends Component {
   constructor(props) {
     super(props);
@@ -34,11 +37,13 @@ export default class AddTask extends Component {
       description: e.target.value
     });
   }
+
   onChangeDate(e) {
     this.setState({
       due_date: e.target.value
     });
   }
+
   onChangeState(e) {
     this.setState({
       state: e.target.value

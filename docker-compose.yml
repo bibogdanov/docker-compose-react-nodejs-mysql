@@ -51,6 +51,18 @@ services:
       - 8888:3000
     networks:
       - frontend
+  # rp:
+  #   image: nginx:1.18-alpine
+  #   entrypoint: nginx -g "daemon off;"
+  #   ports:
+  #     - 443:443
+  #   restart: unless-stopped
+  #   logging:
+  #     options:
+  #       max-size: 10m
+  #   networks:
+  #     - backend
+  #     - frontend
 
 volumes:
   db:

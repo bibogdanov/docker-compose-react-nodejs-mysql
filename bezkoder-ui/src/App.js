@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AddTask from "./components/add-task.component";
-// import Tutorial from "./components/tutorial.component";
+import Task from "./components/task.component";
 import TasksList from "./components/tasks-list.component";
 
 class App extends Component {
@@ -33,7 +33,7 @@ class App extends Component {
           <Switch>
             <Route exact path={["/", "/tasks"]} component={TasksList} />
             <Route exact path="/add" component={AddTask} />
-            {/* <Route path="/tutorials/:id" component={Tutorial} /> */}
+            <Route path="/tutorials/:id" component={Task} />
           </Switch>
         </div>
       </div>
