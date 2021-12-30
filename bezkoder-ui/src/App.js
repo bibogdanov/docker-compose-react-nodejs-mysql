@@ -3,7 +3,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-// import AddTutorial from "./components/add-tutorial.component";
+import AddTask from "./components/add-task.component";
 // import Tutorial from "./components/tutorial.component";
 import TasksList from "./components/tasks-list.component";
 
@@ -32,8 +32,8 @@ class App extends Component {
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/tasks"]} component={TasksList} />
-            {/* <Route exact path="/add" component={AddTutorial} />
-            <Route path="/tutorials/:id" component={Tutorial} /> */}
+            <Route exact path="/add" component={AddTask} />
+            {/* <Route path="/tutorials/:id" component={Tutorial} /> */}
           </Switch>
         </div>
       </div>
